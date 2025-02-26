@@ -10,18 +10,35 @@ class Game extends StatelessWidget {
                 width: 300,
                 child: Column(
                     children: [
+                        SizedBox(height: 20),
                         Image.asset(
                             "assets/images/king.png",
-                            width: 250,
-                            height: 250,
+                            width: 200,
+                            height: 200,
                         ),
                         SizedBox(height: 20),
                         TextField(
                             decoration: InputDecoration(
                                 labelText: 'Make a guess',
-                                border: OutlineInputBorder(),
+                                labelStyle: TextStyle(
+                                    color: Colors.black
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: Colors.black, width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: Colors.black, width: 2),
+                                ),
+                                fillColor: Color.fromARGB(220, 122, 122, 122),
+                                filled: true
                             ),
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black
+                            ),
+
                         )
                     ],
                 ),

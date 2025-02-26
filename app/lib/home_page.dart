@@ -19,22 +19,35 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
             appBar: AppBar(
                 title: Text(
-                    "CRDle",
+                    "CRDLE",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Color(0xffffcc00),
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: 32,
+                        fontFamily: 'ClashRoyale'
                     )
                 ),
-                backgroundColor: Colors.blueAccent,
+                backgroundColor: Color(0xff0054b4),
+                centerTitle: true,
             ),
-            body: pages[index],
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background.png"),
+                    fit: BoxFit.cover
+                )
+              ),
+              child: pages[index]
+            ),
             bottomNavigationBar: NavigationBar(
+                backgroundColor: Color(0xff0054b4),
+                indicatorColor: Colors.blue,
+                selectedIndex: index,
                 onDestinationSelected: changePage,
                 destinations: [
-                    NavigationDestination(icon: Icon(Icons.gamepad), label: "Jeu"),
-                    NavigationDestination(icon: Icon(Icons.assessment), label: "Statistiques"),
-                    NavigationDestination(icon: Icon(Icons.collections), label: "Collection")
+                    NavigationDestination(icon: Icon(Icons.gamepad, color: Color(0xffffcc00)), label: "Jeu"),
+                    NavigationDestination(icon: Icon(Icons.assessment, color: Color(0xffffcc00)), label: "Statistiques"),
+                    NavigationDestination(icon: Icon(Icons.collections, color: Color(0xffffcc00)), label: "Collection")
                 ],
             )
         );
