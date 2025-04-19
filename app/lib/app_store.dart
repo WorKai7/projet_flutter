@@ -5,20 +5,38 @@ class AppStoreState {
     final Map<String, dynamic>? cardToGuess;
     final List<dynamic>? cards;
     final List<Map<String, String>>? cardSuggestions;
+    final double opacity;
+    final List<String>? wrongGuesses;
 
-    AppStoreState({this.cardToGuess, this.cards, this.cardSuggestions});
+    AppStoreState({
+        this.cardToGuess,
+        this.cards,
+        this.cardSuggestions,
+        this.opacity = 1,
+        this.wrongGuesses
+    });
 
     factory AppStoreState.init() {
         return AppStoreState(
-            cardSuggestions: []
+            cardSuggestions: [],
+            opacity: 1,
+            wrongGuesses: []
         );
     }
 
-    AppStoreState copyWith({Map<String, dynamic>? cardToGuess, List<dynamic>? cards, List<Map<String, String>>? cardSuggestions}) {
+    AppStoreState copyWith({
+        Map<String, dynamic>? cardToGuess,
+        List<dynamic>? cards,
+        List<Map<String, String>>? cardSuggestions,
+        double? opacity,
+        List<String>? wrongGuesses
+    }) {
         return AppStoreState(
             cardToGuess: cardToGuess ?? this.cardToGuess,
             cards: cards ?? this.cards,
-            cardSuggestions: cardSuggestions ?? this.cardSuggestions
+            cardSuggestions: cardSuggestions ?? this.cardSuggestions,
+            opacity: opacity ?? this.opacity,
+            wrongGuesses: wrongGuesses ?? this.wrongGuesses
         );
     }
 }
@@ -59,15 +77,39 @@ class AppStore extends StateNotifier<AppStoreState> {
         } else {
             state = state.copyWith(cardSuggestions: []);
         }
-
-        print(state.cardSuggestions);
     }
 
     void selectCard(String text) {
+        // On peut essayer de refactor en donnant la carte direct en parametre
         if (text == state.cardToGuess?["name"]) {
-            print("ET CEST GAGNEEEEEEEEEE");
+            state = state.copyWith(opacity: 0);
+            // On fera en sorte que ca nous mette un popup jsp comment mais on va essayer
+
         } else {
-            print("Essaye encooooore");
+            bool valid = false;
+            state.cards?.forEach((card) {
+                if (card["name"] == text) {
+                    if (!state.wrongGuesses!.contains(card["iconUrls"]["medium"])) {
+                        state.wrongGuesses?.add(card["iconUrls"]["medium"]);
+                        valid = true;
+                    }
+                }
+            });
+
+            if (valid) {
+                if (state.opacity > 0) {
+                    state = state.copyWith(
+                        opacity: state.opacity - 0.01,
+                        wrongGuesses: state.wrongGuesses
+                    );
+                } else {
+                    state = state.copyWith(
+                        wrongGuesses: state.wrongGuesses
+                    );
+                }
+            } else {
+                print("Faire apparaitre notification pour dire qu'on a déjà entré la carte");
+            }
         }
     }
 }

@@ -1,0 +1,1 @@
+/home/workai/Documents/dev/IUT/S4/Flutter/projet_flutter/app/build/app/intermediates/cxx/Debug/l2f3p3av/obj/arm64-v8a

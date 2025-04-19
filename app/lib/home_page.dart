@@ -17,18 +17,22 @@ class _HomePageState extends State<HomePage> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(
-                title: Text(
-                    "CRDLE",
-                    style: TextStyle(
-                        color: Color(0xffffcc00),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32,
-                        fontFamily: 'ClashRoyale'
-                    )
-                ),
-                backgroundColor: Color(0xff0054b4),
-                centerTitle: true,
+          resizeToAvoidBottomInset: false,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: AppBar(
+                  title: Text(
+                      "CRDLE",
+                      style: TextStyle(
+                          color: Color(0xffffcc00),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                          fontFamily: 'ClashRoyale'
+                      )
+                  ),
+                  backgroundColor: Color(0xff0054b4),
+                  centerTitle: true,
+              ),
             ),
             body: Container(
               decoration: BoxDecoration(
